@@ -19,3 +19,4 @@ bin-release/
 env
 .idea
 chat_room/chat_room/config/.env
+db.sqlite3
