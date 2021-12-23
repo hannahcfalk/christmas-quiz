@@ -11,17 +11,22 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-config = AutoConfig(search_path=BASE_DIR.joinpath('config'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('DJANGO_SECRET_KEY')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
 
     # Packages
     'channels',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +82,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chat_room.wsgi.application'
 
-ASGI_APPLICATION = "chatty_room.asgi.application"
+ASGI_APPLICATION = "chat_room.asgi.application"
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
