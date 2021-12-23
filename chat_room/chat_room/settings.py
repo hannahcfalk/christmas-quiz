@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Apps
+    'chat_app',
+
+    # Packages
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +75,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat_room.wsgi.application'
+
+ASGI_APPLICATION = "chatty_room.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
